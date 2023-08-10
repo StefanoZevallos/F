@@ -4,11 +4,14 @@ from models.mascota import MascotaModel
 from flask_migrate import Migrate
 from flask_restful import Api
 from controllers.usuario import UsuariosController,UsuarioController
+from controllers.mascota import MascotasController
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
 from os import environ
+from dotenv import load_dotenv
 
 
+load_dotenv()
 app = Flask(__name__)
 api = Api(app)
 CORS(app,origins=['https://editor.swagger.io'], methods=['GET','POST','PUT','DELETE'],
@@ -42,6 +45,7 @@ Migrate(app=app,db=conexion)
 
 api.add_resource(UsuariosController,'/usuarios')
 api.add_resource(UsuarioController,'/usuario/<int:id>')
+api.add_resource(MascotasController,'/mascotas')
 
 
 
