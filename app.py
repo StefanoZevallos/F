@@ -6,6 +6,7 @@ from flask_restful import Api
 from controllers.usuario import UsuariosController,UsuarioController
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
+from os import environ
 
 
 app = Flask(__name__)
@@ -23,8 +24,8 @@ configuracionSwagger = get_swaggerui_blueprint(SWAGGER_URL, API_URL, config={
 
 app.register_blueprint(configuracionSwagger)
 
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost:5432/directorio'
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL')
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost:5432/directorio'
 
 
 conexion.init_app(app)
