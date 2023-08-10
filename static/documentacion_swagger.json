@@ -1,0 +1,155 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Directorio de Mascotas API",
+    "description": "Documentacion de API sobre mascotas usando FLask y Postgres",
+    "contact": {
+      "email": "szevallosnl@gmail.com",
+      "name": "Stefano Zevallos"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.11"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:5000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "usuarios",
+      "description": "Endpoints para el manejo de usuarios",
+      "externalDocs": {
+        "description": "Una documentacion adicional",
+        "url": "http://facebook.com"
+      }
+    }
+  ],
+  "paths": {
+    "/usuarios": {
+      "get": {
+        "tags": [
+          "usuarios"
+        ],
+        "summary": "Listar todos los productos",
+        "description": "Este EndPoint sirve para devolver a todos los usuarios registrados en mi API",
+        "operationId": "getUsuarios",
+        "responses": {
+          "200": {
+            "description": "Exitoso",
+            "content": {
+              "applicaction/json": {
+                "schema": {
+                  "properties": {
+                    "content": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Usuarios"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "usuarios"
+        ],
+        "requestBody": {
+          "description": "Información para crear el nuevo usuario",
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "nombre": {
+                    "type": "string",
+                    "example": "Eduardo"
+                  },
+                  "apellido": {
+                    "type": "string",
+                    "example": "Eduardo"
+                  },
+                  "correo": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "telefono": {
+                    "type": "string",
+                    "example": 999999999
+                  },
+                  "linkedinUrl": {
+                    "type": "string",
+                    "format": "url"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Creacion correcta del usuario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Usuario creado exitosamente"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "si la informacion es incorrecta o el usuario ya existe"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Usuarios": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "nombre": {
+            "type": "string",
+            "example": "Eduardo"
+          },
+          "apellido": {
+            "type": "string",
+            "example": "Eduardo"
+          },
+          "correo": {
+            "type": "string",
+            "format": "email"
+          },
+          "telefono": {
+            "type": "string",
+            "example": 999999999
+          },
+          "linkedinUrl": {
+            "type": "string",
+            "format": "url"
+          }
+        }
+      }
+    }
+  }
+}
